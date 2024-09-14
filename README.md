@@ -27,26 +27,30 @@ sequenceDiagram
 ```
 
 ## Key Features
--Secure login over HTTPS
--Ability to log a spending activity
--When logging a spending activity, the user can choose a category and rate the necessity of the purchase
--Ability to link to another user and view the information that they have logged
--Logged purchases are persistently stored
+- Secure login over HTTPS
+- Ability to log a spending activity
+- When logging a spending activity, the user can choose a category and rate the necessity of the purchase
+- Ability to link to another user and view the information that they have logged
+- Logged purchases are persistently stored
 
 ## Representing Technologies
 
 I am going to use the required technologies in the following ways. 
 
--**HTML** 4 HTML pages. One for login, one for registration, one for logging a purchase, and one for viewing you and your partner's spending history. 
+- **HTML** 4 HTML pages. One for login, one for registration, one for logging a purchase, and one for viewing you and your partner's spending history. 
 
--**CSS** Application styling that looks good on diffent screen types. Cohesive and well designed color scheme
+- **CSS** Application styling that looks good on diffent screen types. Cohesive and well designed color scheme
 
--**JavaScript** Allows for navigation across the app and validates the information in the forms. 
+- **JavaScript** Allows for navigation across the app and validates the information in the forms. 
 
--**React** Provides login, updates spending logs, displays spending logs on main page.
+- **React** Provides login, updates spending logs, displays spending logs on main page.
 
--**Service** Backend services with endpoints for login, logging a purchase, retriving your purchases, Retriving your partners purchases
+- **Service**
+    - Backend services with endpoints for login
+    - Logging a purchase
+    - Retriving your purchases
+    - Retriving your partners purchases
 
--**DB/Login** Users data will be stored and called from a Database. This includes Login information, a reference to the user that they're linked to and the purchase information that the users input into the website. 
+- **DB/Login** Users data will be stored and called from a Database. This includes Login information, a reference to the user that they're linked to and the purchase information that the users input into the website. 
 
--**WebSocket** When one user logs a purchase, the information will be updated and displayed in real time on their partner's screen. 
+- **WebSocket** When one user logs a purchase, the information will be updated and displayed in real time on their partner's screen. 

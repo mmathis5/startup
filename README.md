@@ -42,9 +42,13 @@ I am going to use the required technologies in the following ways.
 -**React**
 
 -**Service** Backend services with endpoints for: 
-    -login\n
+    
+    -login
+    
     -logging a purchase\n
+    
     -retriving your purchases\n
+    
     -retriving your partners purchases\n
 
 -**DB/Login** Users data will be stored and called from a Database. This includes Login information, a reference to the user that they're linked to and the purchase information that the users input into the website. 

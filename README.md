@@ -9,9 +9,9 @@ Keeping track of your and your partner's spending habits and understanding the p
 
 ## Design
 ![Mock](design/loginPage.jpg)
-[Mock](design/registrationPage.jpg)
-[Mock](design/mainPage.jpg)
-[Mock](design/logPage.jpg)
+![Mock](design/registrationPage.jpg)
+![Mock](design/mainPage.jpg)
+![Mock](design/logPage.jpg)
 
 
 Here is a sequence diagram that shows how a user would interact with the backend to log a new purchase.

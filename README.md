@@ -37,13 +37,13 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways. 
 
--**HTML** 3 HTML pages. One for login/registration, one for logging a purchase, and one for viewing you and your partner's spending history. 
+-**HTML** 4 HTML pages. One for login, one for registration, one for logging a purchase, and one for viewing you and your partner's spending history. 
 
 -**CSS** Application styling that looks good on diffent screen types. Cohesive and well designed color scheme
 
--**JavaScript** 
+-**JavaScript** Allows for navigation across the app and validates the information in the forms. 
 
--**React**
+-**React** Provides login, updates spending logs, displays spending logs on main page.
 
 -**Service** Backend services with endpoints for login, logging a purchase, retriving your purchases, Retriving your partners purchases
 

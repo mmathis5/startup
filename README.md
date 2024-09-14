@@ -8,7 +8,11 @@ CS 260 Startup
 Keeping track of your and your partner's spending habits and understanding the purchases you make can be difficult but my application will make this task simple and insightful. The users can connect with each other on my web application to track, categorize, and rate the necessity of their spending habits. The application will display each user's logged purchases and offer deeper insights into how couples can manage their finances together.
 
 ## Design
-image goes here
+![Mock](design/loginPage.jpg)
+![Mock](design/registrationPage.jpg)
+![Mock](design/mainPage.jpg)
+![Mock](design/logPage.jpg)
+
 
 Here is a sequence diagram that shows how a user would interact with the backend to log a new purchase.
 
@@ -41,12 +45,7 @@ I am going to use the required technologies in the following ways.
 
 -**React**
 
--**Service** Backend services with endpoints for: 
-    
--login
--logging a purchase
--retriving your purchases
--retriving your partners purchases
+-**Service** Backend services with endpoints for login, logging a purchase, retriving your purchases, Retriving your partners purchases
 
 -**DB/Login** Users data will be stored and called from a Database. This includes Login information, a reference to the user that they're linked to and the purchase information that the users input into the website. 
 

@@ -43,13 +43,10 @@ I am going to use the required technologies in the following ways.
 
 -**Service** Backend services with endpoints for: 
     
-    -login
-    
-    -logging a purchase\n
-    
-    -retriving your purchases\n
-    
-    -retriving your partners purchases\n
+-login
+-logging a purchase
+-retriving your purchases
+-retriving your partners purchases
 
 -**DB/Login** Users data will be stored and called from a Database. This includes Login information, a reference to the user that they're linked to and the purchase information that the users input into the website. 
 

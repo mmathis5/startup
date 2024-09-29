@@ -63,3 +63,4 @@ I am going to use the required technologies in the following ways.
 - [x] **Login Placeholder** - login form is present on the index.html page
 - [x] **Database Data Placeholder** - Database data placeholders are mainly found on the display.html page where the current user's financial logs are displayed. There is also a database placeholder on the log.html page where it displays the user that is making the new log. 
 - [x] **Websocket** - The connected user's data will be populated on the display.html page via Websocket. 
+- [x] **Third Party Service Call** - The about.html page will display a random fact pulled from the Entertainment section of the Public APIs that were provided in the cs260 github. 

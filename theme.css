@@ -6,16 +6,43 @@ body {
   }
   
   header{
-    flex: 0 50px;
     display: flex;
-    background-color:gray;
+    align-items: center;
+    background-color:#4b5057;
+    padding: 10px 20px;
+    height: 60px;
+    color: white;
+  }
+
+  
+header h1{
+    margin-right: 20px;
+    font-size: 35px;
+    font-family: 'Roboto Bold', sans-serif;
+  }
+  
+  nav menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+  
+  nav menu li{
+    margin-right: 8px; 
+  }
+
+  nav a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Roboto', sans-serif;
   }
   
   main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align: center; 
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -29,7 +56,14 @@ body {
     display: flex;
     height: 30px;
     text-align: center;
-    background-color: gray;
+    background-color: #4b5057;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  footer a{
+    color: white;
+    font-family: 'Roboto', sans-serif;
   }
   
   text-reset, a {

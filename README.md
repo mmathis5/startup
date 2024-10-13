@@ -64,3 +64,10 @@ I am going to use the required technologies in the following ways.
 - [x] **Database Data Placeholder** - Database data placeholders are mainly found on the display.html page where the current user's financial logs are displayed. There is also a database placeholder on the log.html page where it displays the user that is making the new log. 
 - [x] **Websocket** - The connected user's data will be populated on the display.html page via Websocket. 
 - [x] **Third Party Service Call** - The about.html page will display a random fact pulled from the Entertainment section of the Public APIs that were provided in the cs260 github. 
+
+#CSS Deliverable
+-[x] **Header, footer, and main content body** I created individual css files for each page that styled the main section. The footer and header elements were styled using a theme.css file that applies to all pages.
+-[x] **Navigation elements** - I created cohesive headers and footers that are used on every page
+-[x] **Responsive window sizing** - I used the ideas we were taught in the flex assignment to make sure the windows were resizing appropriately
+-[x] **Application Elements** - I made buttons using bootstrap and styled the other relevant elements to pair cohesively with the bootstrap elements.
+-[x] **Application Images** - There are images on the about page that I have resized to make them appear more aesthetically cohesive with the rest of the application. 

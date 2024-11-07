@@ -10,3 +10,6 @@ I thought it was really neat to learn more about CSS. In fact, now that I unders
 
 ##CSS Deliverable
 I was suprised to see how much more sense html made once I started working with CSS. I feel like using the two of them together gave me a better understanding of both languages. Overall, I enjoy styling with html and think that the bootstrap elements make everythihng really aesthetic for the user and easy for the developer. 
+
+### Adjusting to my new computer
+I got a new computer a bit ago and it has been HARD to set everything up correctly. With creating a new repository, transferring my pem files, and getting all of the new simon stuff set up (in addition to all of the programs I had to reinstall) 

@@ -2,11 +2,13 @@ import React from "react";
 import './about.css';
 
 export function About(props){
-    const [imageUrl, setImageUrl] = React.useState('data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=');
+    const [image1Url, setImage1Url] = React.useState('data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=');
+    const [image2Url, setImage2Url] = React.useState('data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=');
     const [fact, setFact] = React.useState('Loading...');    
 
 React.useEffect(() => {
-    setImageUrl('stonks.jpg');
+    setImage1Url('stonks.jpg');
+    setImage2Url('money.jpg');
     setFact('This is a fun fact');
 }, []);
 
@@ -25,8 +27,8 @@ return (
             </div>
 
             <div id="picture" className="picture-box">
-                <img width="200px" src={imageUrl} alt="stonks" />
-                <img width="215px" src="../money.jpg" alt="money" />
+                <img width="200px" src={image1Url} alt="stonks" />
+                <img width="215px" src={image2Url} alt="money" />
             </div>
         </main>
     );

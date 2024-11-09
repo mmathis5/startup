@@ -1,8 +1,14 @@
-body {
+html, body{
+  height: 100%;
+  margin: 0
+}
+
+.body {
   display: flex;
   flex-direction: column;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
+  min-width: 375px;
 }
 
 header{
@@ -12,6 +18,16 @@ header{
   padding: 10px 20px;
   height: 60px;
   color: white;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #4b82db;
 }
 
 
@@ -37,16 +53,6 @@ nav a {
   text-decoration: none;
   color: white;
   font-family: 'Roboto', sans-serif;
-}
-
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: #4b82db;
 }
 
 footer{
@@ -92,14 +98,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {

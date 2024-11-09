@@ -4,7 +4,7 @@ import { About } from './about/about'
 import { Display } from './display/display'
 import { Log } from './log/log'
 import { Connect} from './connect/connect'
-import { AuthState } from './home/authState'
+import { AuthState } from './login/authState'
 import './App.css'
 
 

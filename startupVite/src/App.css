@@ -1,4 +1,4 @@
-/* body {
+body {
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -68,7 +68,7 @@ footer a{
 
 text-reset, a {
   margin: 5px;
-} */
+}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

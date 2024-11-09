@@ -73,7 +73,7 @@ return (
           />
       <Route path='/connect' element={<Connect userName={userName} />}/>
       <Route path='/display' element={<Display userName={userName}/>}/>
-      <Route path = '/log' element={<Log userName={userName}/>} />
+      <Route path = '/log' element={<Log currentUser={userName}/>} />
       <Route path='/about' element = {<About />}/>
     </Routes>
     

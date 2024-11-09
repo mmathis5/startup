@@ -26,23 +26,29 @@ return (
               Home
             </NavLink>
           </li>
-          <li className = 'nav-item'>
+          {authState === AuthState.Authenticated && (
+            <li className = 'nav-item'>
             <NavLink className='nav-link' to = 'connect'>
               Connect
             </NavLink>
           </li>
-          <li className = 'nav-item' to = 'display'>
-            <NavLink className='nav-link'>
+          )}
+          {authState === AuthState.Authenticated &&(
+            <li className = 'nav-item'>
+            <NavLink className='nav-link' to = 'display'>
               Display
             </NavLink>
           </li>
-          <li className = 'nav-item' to = 'log'>
-            <NavLink className='nav-link'>
+          )}
+          {authState === AuthState.Authenticated && (
+            <li className = 'nav-item'>
+            <NavLink className='nav-link' to = 'log'>
               Log
             </NavLink>
           </li>
-          <li className = 'nav-item' to = 'about'>
-            <NavLink className='nav-link'>
+          )}
+          <li className = 'nav-item'>
+            <NavLink className='nav-link'  to = 'about'>
               About
             </NavLink>
           </li>
@@ -73,7 +79,7 @@ return (
     
     <footer>
       <div>
-      <span class = "text-reset"> Maddie Mathis </span>
+      <span className = "text-reset"> Maddie Mathis </span>
       <a href="https://github.com/mmathis5/startup">GitHub</a>
       </div>
     </footer>

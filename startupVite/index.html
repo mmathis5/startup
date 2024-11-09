@@ -1,13 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Financial Management Startup HTML</title>
+    <link rel="stylesheet" href = "index.css">
+    <link rel="stylesheet" href = theme.css>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+  
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <header>
+      <h1>Paired Financial Management</h1>
+
+      <nav>
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="connect/connect.html">Connect</a></li>
+          <li><a href="display/display.html">Display</a></li>
+          <li><a href = "log/log.html">Log</a></li>
+          <li><a href="about/about.html">About</a></li>
+        </menu>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Welcome to Paired Financial Management</h1>
+      <form>
+        <div class="rounded-box">
+          <span>@</span>
+          <input type="text" placeholder="your@email.com" />
+        </div>
+        <div class="rounded-box">
+          <span>🔒</span>
+          <input type="password" placeholder="password" />
+        </div>
+        <button type="submit" class ="btn btn-primary">Login</button>
+        <button type="submit" class = "btn btn-secondary">Create</button>
+      </form>
+    </main>
+
+    <footer>
+      <span class = "text-reset"> Maddie Mathis </span>
+      <a href="https://github.com/mmathis5/startup">GitHub</a>
+    </footer>
   </body>
 </html>

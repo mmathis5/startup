@@ -1,0 +1,14 @@
+main h1{
+    font-family:'Roboto', sans-serif;
+    font-weight: bold;
+  }
+  
+  .rounded-box {
+    border: 2px solid #385d82; 
+    border-radius: 10px; /* Rounded edges */
+    padding: 10px; /* Inner spacing */
+    margin: 20px auto; /* Centering with margin */
+    max-width: 800px; /* Maximum width of the box */
+    background-color: white; /* Background color of the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  }

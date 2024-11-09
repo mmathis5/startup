@@ -5,6 +5,7 @@ import { Display } from './display/display'
 import { Log } from './log/log'
 import { Connect} from './connect/connect'
 import { AuthState } from './login/authState'
+import { Login } from './login/login'
 import './App.css'
 
 
@@ -21,7 +22,7 @@ return (
       <nav>
         <menu className = 'navbar-nav'>
           <li className = 'nav-item'>
-            <NavLink className = 'nav-link' to= 'home'>
+            <NavLink className = 'nav-link' to= ''>
               Home
             </NavLink>
           </li>
@@ -65,8 +66,8 @@ return (
             exact
           />
       <Route path='/connect' element={<Connect userName={userName} />}/>
-      <Route path='display' element={<Display userNmae={userName}/>}/>
-      <Route path = 'log' element={<Log/>} />
+      <Route path='/display' element={<Display userName={userName}/>}/>
+      <Route path = '/log' element={<Log userName={userName}/>} />
       <Route path='/about' element = {<About />}/>
     </Routes>
     

@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import './App.css'
 import { About } from './about/about'
+import { Display } from './display/display'
+import { Log } from './log/log'
+import { Connect} from './connect/connect'
 import { AuthState } from './home/authState'
+import './App.css'
 
 
 function App() {
@@ -47,6 +50,23 @@ return (
     </header>
 
     <Routes>
+       <Route
+            path='/'
+            element={
+              <Login
+                userName={userName}
+                authState={authState}
+                onAuthChange={(userName, authState) => {
+                  setAuthState(authState);
+                  setUserName(userName);
+                }}
+              />
+            }
+            exact
+          />
+      <Route path='/connect' element={<Connect userName={userName} />}/>
+      <Route path='display' element={<Display userNmae={userName}/>}/>
+      <Route path = 'log' element={<Log/>} />
       <Route path='/about' element = {<About />}/>
     </Routes>
     

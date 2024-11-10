@@ -2,7 +2,7 @@ import React from 'react';
 import './connect.css'
 
 export function Connect({userName}){
-    const[partnerEmail, setPartnerEmail] = useState('');
+    const[partnerEmail, setPartnerEmail] = React.useState('');
 
     const handleEmailChange = (event) => {
         setPartnerEmail('event.target.value');

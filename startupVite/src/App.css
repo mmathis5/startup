@@ -1,26 +1,14 @@
-html, body{
+/* Make sure the #root element has flex display */
+html, body, #root {
   height: 100%;
-  margin: 0
-}
-
-body{
+  margin: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
-header{
-  display: flex;
-  flex: 0;
-  align-items: center;
-  background-color:#4b5057;
-  padding: 10px 20px;
-  height: 60px;
-  color: white;
-}
-
+/* Main flex setup */
 main {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,12 +17,28 @@ main {
   background-color: #4b82db;
 }
 
-
-header h1{
-  margin-right: 20px;
-  font-size: 35px;
-  font-family: 'Roboto Bold', sans-serif;
+/* Header and footer settings */
+header {
+  display: flex;
+  align-items: center;
+  background-color: #4b5057;
+  padding: 10px 20px;
+  height: 60px;
+  color: white;
 }
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  background-color: #4b5057;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Rest of your CSS (styles for h1, nav, buttons, etc.) remains the same */
+
 
 nav menu {
   list-style: none;
@@ -44,24 +48,16 @@ nav menu {
   align-items: center;
 }
 
+.navbar-nav .nav-item-1{
+  margin-left: 20px;
+}
+
 nav menu li{
-  margin-right: 8px; 
+  margin-left: 8px; 
 }
 
 nav a {
   text-decoration: none;
-  color: white;
-  font-family: 'Roboto', sans-serif;
-}
-
-footer{
-  justify-content: center;
-  align-items: center;
-  flex: 0 30px;
-  display: flex;
-  height: 30px;
-  text-align: center;
-  background-color: #4b5057;
   color: white;
   font-family: 'Roboto', sans-serif;
 }
@@ -89,6 +85,7 @@ text-reset, a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 a {
   font-weight: 500;

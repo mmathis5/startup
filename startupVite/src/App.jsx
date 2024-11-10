@@ -13,15 +13,15 @@ function App() {
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
+  const [connectedUser, setConnectedUser] = React.useState(localStorage.connectedUser);
 
 return (
 <BrowserRouter>
-  <div className='header'>
     <header>
       <h1>Paired Financial Management</h1>
       <nav>
         <menu className = 'navbar-nav'>
-          <li className = 'nav-item'>
+          <li className = 'nav-item-1'>
             <NavLink className = 'nav-link' to= ''>
               Home
             </NavLink>
@@ -83,7 +83,6 @@ return (
       <a href="https://github.com/mmathis5/startup">GitHub</a>
       </div>
     </footer>
-  </div>
 </BrowserRouter>
 );
 }

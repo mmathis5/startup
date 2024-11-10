@@ -1,8 +1,15 @@
 // Display.jsx
 import React, { useState, useEffect } from 'react';
 
-export function Display({ userName, partnerName }) {
+export function Display({ userName }) {
   const [logs, setLogs] = useState([]);
+  const [partnerName, setPartnerName] = useState(localStorage.getItem('partnerEmail'));
+
+
+  useEffect(() => {
+    const partner = localStorage.getItem('partnerEmail');
+    setPartnerName(partner);
+  }, []);
 
   useEffect(() => {
     const storedLogs = JSON.parse(localStorage.getItem('purchaseLogs')) || [];

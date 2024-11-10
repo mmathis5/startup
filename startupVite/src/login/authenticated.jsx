@@ -7,14 +7,14 @@ export function Authenticated(props) {
     const navigate = useNavigate();
     
     function logout(){
-        localStorage.remove('userName');
+        localStorage.removeItem('userName');
         props.onLogout();
     }
 
     return(
         <div>
             <div className = 'playerName'>{props.userName}</div>
-            <Button variant='secondary' onclick={() => logout()}>
+            <Button variant='secondary' onClick={() => logout()}>
                 Logout
             </Button>
         </div>

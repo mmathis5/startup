@@ -1,4 +1,3 @@
-// Display.jsx
 import React, { useState, useEffect } from 'react';
 
 export function Display({ userName }) {

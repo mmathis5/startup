@@ -13,7 +13,7 @@ function App() {
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
-  const [connectedUser, setConnectedUser] = React.useState(localStorage.connectedUser);
+
 
 return (
 <BrowserRouter>
@@ -72,7 +72,7 @@ return (
             exact
           />
       <Route path='/connect' element={<Connect userName={userName} />}/>
-      <Route path='/display' element={<Display userName={userName}/>}/>
+      <Route path='/display' element={<Display userName={userName} partnerName={localStorage.getItem('partnerEmail')}/>}/>
       <Route path = '/log' element={<Log currentUser={userName}/>} />
       <Route path='/about' element = {<About />}/>
     </Routes>

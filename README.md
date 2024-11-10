@@ -74,3 +74,9 @@ I am going to use the required technologies in the following ways.
 - [x] **Responsive window sizing** - I used the ideas we were taught in the flex assignment to make sure the windows were resizing appropriately
 - [x] **Application Elements** - I made buttons using bootstrap and styled the other relevant elements to pair cohesively with the bootstrap elements.
 - [x] **Application Images** - There are images on the about page that I have resized to make them appear more aesthetically cohesive with the rest of the application. 
+
+# React Deliverable
+- [x] Bundled using Vite - My application is currently housed in a sub-folder of my github called startupVite. I will probably be refactoring it to just be in the main part of the github.
+- [x] Components - Login, Logging, Display, and Connect are all functional. The websocket elements of the Display tab are not totally done but you are able to view the purchase logs of the connected and logged in user.
+- [x] React Router - Routing between the different tabs is dependent on the login and authentication.
+- [x] React Hooks - I am using useState to store data. This is used to populate and retrive needed items. I also am using useEffect to make sure my data is being correctly populated without having to manualy refresh any pages. 

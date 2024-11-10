@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 export function Log({currentUser}){
     const [purchase, setPurchase] = useState('');
     const [amount, setAmount] = useState('');
     const [necessity, setNecessity] = useState('5');
+    const [logs, setLogs] = useState([]); 
 
     useEffect(() => {
       const storedLogs = JSON.parse(localStorage.getItem('purchaseLogs')) || [];
@@ -14,7 +15,7 @@ export function Log({currentUser}){
       event.preventDefault();
       const logEntry = {
         user: currentUser,
-        timestamp: new Date().toISOString(), 
+        date: new Date().toISOString().split('T')[0], 
         purchase,
         amount,
         necessity,

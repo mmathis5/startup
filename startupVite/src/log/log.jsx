@@ -5,20 +5,29 @@ export function Log({currentUser}){
     const [amount, setAmount] = useState('');
     const [necessity, setNecessity] = useState('5');
 
+    useEffect(() => {
+      const storedLogs = JSON.parse(localStorage.getItem('purchaseLogs')) || [];
+      setLogs(storedLogs);
+    }, []);
+  
     const handleSubmit = (event) => {
-        event.preventDefault();
-        const logEntry = {
-            user: currentUser,
-            purchase, 
-            amount, 
-            necessity
-        };
-        console.log('Logging Purchase:', logEntry);
-        //clears form field out after submit is pressed
-        setPurchase('');
-        setAmount('');
-        setNecessity('5');
-    };
+      event.preventDefault();
+      const logEntry = {
+        user: currentUser,
+        timestamp: new Date().toISOString(), 
+        purchase,
+        amount,
+        necessity,
+      };
+  
+    const existingLogs = JSON.parse(localStorage.getItem('purchaseLogs')) || [];
+    existingLogs.push(logEntry);
+    localStorage.setItem('purchaseLogs', JSON.stringify(existingLogs));
+    console.log('Logging Purchase:', logEntry);
+    setPurchase('');
+    setAmount('');
+    setNecessity('5');
+  };
 
     return (
         <main>

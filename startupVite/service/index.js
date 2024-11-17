@@ -34,14 +34,36 @@ apiRouter.post('/log', (req, res) =>{
     if (!user){
         res.status(400).send({ msg: 'No user found' });
     }
-    const userLogs = logs[user]
+    const userLogs = logs[user];
     if (!userLogs){
         //create new array
-        userLogs = []
+        userLogs = [];
     }
     //pushing into array
-    userLogs.push(req.body)  
-    logs[user] = userLogs  
+    userLogs.push(req.body);  
+    logs[user] = userLogs;
+
+    res.status(201).end();
+});
+
+//get logs
+apiRouter.get('/logs', (req,res) =>{
+    //user, connected user in url request. 
+    const user = req.query.user;
+    const connectedUser = req.query.connectedUser;
+    if (!user){
+        res.status(400).send({ msg: 'No user found' });
+    }
+    //get from logs
+    const userLogs = logs[user];
+    if (!userLogs){
+        userLogs = [];
+    }
+    const connectedLogs = []
+    if (connectedUser & logs[connectedUser]){
+        const connectedLogs = logs[connectedUser];
+    }
+    res.send(userLogs.concat(connectedLogs));
 });
 
 // CreateAuth a new user

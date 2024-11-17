@@ -16,6 +16,7 @@ app.listen(port, () => {
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = {};
 let scores = [];
+let logs = {}
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -26,6 +27,22 @@ app.use(express.static('public'));
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
+
+//log a purchase
+apiRouter.post('/log', (req, res) =>{
+    const user = req.body.email;
+    if (!user){
+        res.status(400).send({ msg: 'No user found' });
+    }
+    const userLogs = logs[user]
+    if (!userLogs){
+        //create new array
+        userLogs = []
+    }
+    //pushing into array
+    userLogs.push(req.body)  
+    logs[user] = userLogs  
+});
 
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
@@ -71,11 +88,6 @@ apiRouter.get('/scores', (_req, res) => {
 apiRouter.post('/score', (req, res) => {
   scores = updateScores(req.body, scores);
   res.send(scores);
-});
-
-// Return the application's default page if the path is unknown
-app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
 });
 
 app.listen(port, () => {

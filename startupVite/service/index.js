@@ -1,13 +1,10 @@
+
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
-
-App.use(express.static('public'));
-
 const express = require('express');
 const app = express();
 
-app.get('*', (_req, res) => {
-  res.send({ msg: 'Simon service' });
-});
+app.use(express.static('public'));
+
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
@@ -53,15 +50,16 @@ apiRouter.get('/logs', (req,res) =>{
     const connectedUser = req.query.connectedUser;
     if (!user){
         res.status(400).send({ msg: 'No user found' });
+        return;
     }
     //get from logs
-    const userLogs = logs[user];
+    let userLogs = logs[user];
     if (!userLogs){
         userLogs = [];
     }
-    const connectedLogs = []
+    let connectedLogs = []
     if (connectedUser & logs[connectedUser]){
-        const connectedLogs = logs[connectedUser];
+        connectedLogs = logs[connectedUser];
     }
     res.send(userLogs.concat(connectedLogs));
 });
@@ -112,9 +110,6 @@ apiRouter.post('/score', (req, res) => {
   res.send(scores);
 });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
 
 // updateScores considers a new score for inclusion in the high scores.
 function updateScores(newScore, scores) {

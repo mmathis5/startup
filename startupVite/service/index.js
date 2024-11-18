@@ -2,6 +2,8 @@
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 const express = require('express');
 const app = express();
+const uuid = require('uuid');
+
 
 app.use(express.static('public'));
 
@@ -66,11 +68,11 @@ apiRouter.get('/logs', (req,res) =>{
 
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  const user = users[req.body.email];
+  var user = users[req.body.email];
   if (user) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
-    const user = { email: req.body.email, password: req.body.password, token: uuid.v4() };
+    var user = { email: req.body.email, password: req.body.password, token: uuid.v4() };
     users[user.email] = user;
 
     res.send({ token: user.token });

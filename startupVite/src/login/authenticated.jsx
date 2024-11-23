@@ -5,26 +5,11 @@ import './authenticated.css';
 
 export function Authenticated(props) {
     const navigate = useNavigate();
-    
-    function logout() {
-        fetch(`/api/auth/logout`, {
-          method: 'delete',
-        })
-          .catch(() => {
-            // Logout failed. Assuming offline
-          })
-          .finally(() => {
-            localStorage.removeItem('userName');
-            props.onLogout();
-          });
-      }
+  
 
     return(
         <div>
-            <div className = 'playerName'>{props.userName}</div>
-            <Button variant='secondary' onClick={() => logout()}>
-                Logout
-            </Button>
+            <div className = 'login-message '> You are logged in, navigate to your desired page. </div>
         </div>
     );
 }

@@ -14,7 +14,7 @@ app.listen(port, () => {
 
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = {};
-let scores = [];
+let connections = {};
 let logs = {}
 
 // JSON body parsing using built-in middleware
@@ -26,45 +26,6 @@ app.use(express.static('public'));
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
-
-//log a purchase
-apiRouter.post('/log', (req, res) =>{
-    const user = req.body.email;
-    if (!user){
-        res.status(400).send({ msg: 'No user found' });
-    }
-    const userLogs = logs[user];
-    if (!userLogs){
-        //create new array
-        userLogs = [];
-    }
-    //pushing into array
-    userLogs.push(req.body);  
-    logs[user] = userLogs;
-
-    res.status(201).end();
-});
-
-//get logs
-apiRouter.get('/logs', (req,res) =>{
-    //user, connected user in url request. 
-    const user = req.query.user;
-    const connectedUser = req.query.connectedUser;
-    if (!user){
-        res.status(400).send({ msg: 'No user found' });
-        return;
-    }
-    //get from logs
-    let userLogs = logs[user];
-    if (!userLogs){
-        userLogs = [];
-    }
-    let connectedLogs = []
-    if (connectedUser & logs[connectedUser]){
-        connectedLogs = logs[connectedUser];
-    }
-    res.send(userLogs.concat(connectedLogs));
-});
 
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
@@ -89,7 +50,7 @@ apiRouter.post('/auth/login', async (req, res) => {
       return;
     }
   }
-  res.status(401).send({ msg: "This username/password doesn't match anything in our database." });
+  res.status(401).send({ msg: "Error: Invalid username or password." });
 });
 
 // DeleteAuth logout a user
@@ -101,36 +62,79 @@ apiRouter.delete('/auth/logout', (req, res) => {
   res.status(204).end();
 });
 
-// GetScores
-apiRouter.get('/scores', (_req, res) => {
-  res.send(scores);
+//log a purchase
+apiRouter.post('/log', (req, res) =>{
+  const user = req.body.email;
+  if (!user){
+      res.status(400).send({ msg: 'No user found' });
+  }
+  const userLogs = logs[user];
+  if (!userLogs){
+      //create new array
+      userLogs = [];
+  }
+  //pushing into array
+  userLogs.push(req.body);  
+  logs[user] = userLogs;
+
+  res.status(201).end();
 });
 
-// SubmitScore
-apiRouter.post('/score', (req, res) => {
-  scores = updateScores(req.body, scores);
-  res.send(scores);
+//get logs
+apiRouter.get('/logs', (req,res) =>{
+  //user, connected user in url request. 
+  const user = req.query.user;
+  const connectedUser = req.query.connectedUser;
+  if (!user){
+      res.status(400).send({ msg: 'No user found' });
+      return;
+  }
+  //get from logs
+  let userLogs = logs[user];
+  if (!userLogs){
+      userLogs = [];
+  }
+  let connectedLogs = []
+  if (connectedUser & logs[connectedUser]){
+      connectedLogs = logs[connectedUser];
+  }
+  res.send(userLogs.concat(connectedLogs));
 });
 
+//connect a user
+apiRouter.post('/connections', (req,res) =>{
+  //user, requested connection in url request.
+  const user = req.query.user;
+  const reqUser = req.query.connectedUser;
+  if (!user){
+    res.status(400).send({meg: "No user found"})
+    return;
+  }
+  if (!connectedUser){
+    res.status(400).send({msg: "Please enter a user you wish to connect with."})
+    return;
+  }
+  //check if the current user is already connected to someone
+  const userConnection = connections[user];
+  const reqUserConnection = connections[reqUser]
+  if (userConnection) {
+    res.status(400).send({msg: 'You are already connected to a user.'})
+    return;
+  }
+  if (reqUserConnection){
+    res.status(400).send({msg: "The user you are trying to connect to is already connected to someone. Please choose another user to connect with."})
+    return;
+  }
+  //create connections for both 
+  connections[user] = reqUser;
+  connections[reqUser] = user;
 
-// updateScores considers a new score for inclusion in the high scores.
-function updateScores(newScore, scores) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
+  res.status(200).send({
+    msg: "connection created successfully",
+    connections: {
+      [user]: reqUser,
+      [reqUser]: user
     }
-  }
+  });
 
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  return scores;
-}
+});

@@ -3,8 +3,7 @@ import './connect.css';
 import { MessageDialog } from '../messageDialog';
 
 export function Connect({userName}){
-    const initialPartnerEmail = localStorage.getItem('partnerEmail') || '';
-    const[partnerEmail, setPartnerEmail] = React.useState(initialPartnerEmail);
+    const[partnerEmail, setPartnerEmail] = React.useState(null);
     const [displayError, setDisplayError] = React.useState(null);
     
     const handleEmailChange = (event) => {
@@ -12,15 +11,18 @@ export function Connect({userName}){
     };
 
     const handleSubmit = (event) => {
-        submit('/api/connections')
+        event.preventDefault();
+        submit('/api/connect')
     };
 
     async function submit(endpoint){
+      console.log(userName);
+      console.log(partnerEmail);
       const response = await fetch(endpoint, {
         method: 'post',
-        body: JSON.stringify({user: initialPartnerEmail, connectedUser: partnerEmail}),
-        headers:{
-          'Content-type': 'appication/json: charset=UTF-8',
+        body: JSON.stringify({ user: userName, reqUser: partnerEmail }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
         },
       });
       if(response?.status === 200){
@@ -43,8 +45,8 @@ export function Connect({userName}){
           <input 
             type="email" 
             placeholder="partneremail@domain.com" 
-            value={partnerEmail}
             onChange={handleEmailChange}
+            value = {partnerEmail}
             required
           />
         </div>

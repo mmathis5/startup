@@ -25,6 +25,7 @@ function App() {
       .finally(() => {
         localStorage.removeItem('userName');
         setAuthState(AuthState.Unauthenticated)
+        Navigate('/');
       });
   }
 

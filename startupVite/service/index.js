@@ -102,15 +102,17 @@ apiRouter.get('/logs', (req,res) =>{
 });
 
 //connect a user
-apiRouter.post('/connections', (req,res) =>{
+apiRouter.post('/connect', (req,res) =>{
   //user, requested connection in url request.
-  const user = req.query.user;
-  const reqUser = req.query.connectedUser;
-  if (!user){
+  const user = req.body.user;
+  const reqUser = req.body.reqUser;
+  const userExists = users[user];
+  const reqUserExists = users[reqUser];
+  if (!userExists){
     res.status(400).send({meg: "No user found"})
     return;
   }
-  if (!connectedUser){
+  if (!reqUserExists){
     res.status(400).send({msg: "Please enter a user you wish to connect with."})
     return;
   }

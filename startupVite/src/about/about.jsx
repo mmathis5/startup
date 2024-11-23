@@ -10,6 +10,22 @@ React.useEffect(() => {
     setImage1Url('stonks.jpg');
     setImage2Url('money.jpg');
     setFact('This is a fun fact');
+
+    fetch('https://uselessfacts.jsph.pl/api/v2/facts/random?language=en')
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then((data) => {
+        setFact(data.text); 
+    })
+    .catch((error) => {
+        console.error('Error fetching the random fact:', error);
+        setFact('Could not load a random fact. Please try again later.');
+    });
+
 }, []);
 
 return (
@@ -22,8 +38,8 @@ return (
 
             <div>
                 <h2>Random Fact:</h2>
-                <p>{fact}</p>
-                <p className="source">Fact generated using Random Useless Quote API</p>
+                <p>'{fact}'</p>
+                <p className="source">Above fact generated using Random Useless Quote API</p>
             </div>
 
             <div id="picture" className="picture-box">

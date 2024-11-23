@@ -62,6 +62,23 @@ apiRouter.delete('/auth/logout', (req, res) => {
   res.status(204).end();
 });
 
+//get connected user
+apiRouter.get('/connectedUser', (req, res) => {
+  const user = req.query.user;
+
+  if (!user) {
+    res.status(400).send({ msg: 'No user provided' });
+    return;
+  }
+  if (!connections[user]){
+    res.status(200).send({ connectedUser: null })
+  }
+  else{  
+    const connectedUser = connections[user];
+    res.status(200).send({ connectedUser });
+}
+});
+
 //log a purchase
 apiRouter.post('/log', (req, res) =>{
   const user = req.body.user;

@@ -19,3 +19,29 @@ const logsCollection = db.collection('logs');
     process.exit(1);
   });
 
+
+function getUser(email){
+    return userCollection.findOne({email: email});
+}
+
+function getUserByToken(token){
+    return userCollection.findOne({token: token});
+}
+
+async function createUser(email, password){
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = {
+        email: email,
+        password: passwordHash,
+        token: uuid.v4(),
+    };
+    await userCollection.inertOne(user);
+    return user;
+}
+
+module.exports = {
+    getUser,
+    getUserByToken,
+    createUser,
+  };
+  

@@ -80,3 +80,9 @@ I am going to use the required technologies in the following ways.
 - [x] Components - Login, Logging, Display, and Connect are all functional. The websocket elements of the Display tab are not totally done but you are able to view the purchase logs of the connected and logged in user.
 - [x] React Router - Routing between the different tabs is dependent on the login and authentication.
 - [x] React Hooks - I am using useState to store data. This is used to populate and retrive needed items. I also am using useEffect to make sure my data is being correctly populated without having to manualy refresh any pages. 
+
+# Service Deliverable
+- [x] Service - This is created and housed in the service folder of startupVite directory.
+- [x] Frontend served up using Express static middleware - I used fetch to call my endpoints
+- [x] 3rd party API - I am currently generating a fun fact on my about page. I may refine this to be more pertinent to the functionality of my application. 
+- [x] Service endpoints - I have many endpoints in my service. I have three for my login funcitonality, one to connect two users, one to log purchases, one to retrieve a connected user, and one to retrieve all the logs for a user and their specified connected user. 

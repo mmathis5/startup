@@ -1,0 +1,30 @@
+.message-dialog {
+    position: fixed;
+    bottom: 60px; /* Adjust to sit above your footer */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1f1e2a; /* Eye-catching color (e.g., bright red-orange) */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeInOut 4s ease-in-out;
+    z-index: 1050; /* Ensure it appears above other elements */
+  }
+  
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 20px);
+    }
+    10%, 90% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, 20px);
+    }
+  }
+  

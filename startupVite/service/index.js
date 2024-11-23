@@ -70,7 +70,7 @@ apiRouter.get('/logs', (req,res) =>{
 apiRouter.post('/auth/create', async (req, res) => {
   var user = users[req.body.email];
   if (user) {
-    res.status(409).send({ msg: 'Existing user' });
+    res.status(409).send({ msg: 'A user already exists under this email. Please login.' });
   } else {
     var user = { email: req.body.email, password: req.body.password, token: uuid.v4() };
     users[user.email] = user;
@@ -89,7 +89,7 @@ apiRouter.post('/auth/login', async (req, res) => {
       return;
     }
   }
-  res.status(401).send({ msg: 'Unauthorized' });
+  res.status(401).send({ msg: "This username/password doesn't match anything in our database." });
 });
 
 // DeleteAuth logout a user

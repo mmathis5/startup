@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from 'react-bootstrap/Button';
+import { MessageDialog } from './messageDialog';
 
 export function Unauthenticated(props){
     const [userName, setUserName] = React.useState(props.username);
@@ -51,7 +52,7 @@ export function Unauthenticated(props){
             </Button>
           </div>
 
-        <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />          
+          <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />          
         </>
       );
 

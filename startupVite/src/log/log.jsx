@@ -1,15 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import { MessageDialog } from '../messageDialog';
 
 export function Log({currentUser}){
     const [purchase, setPurchase] = useState('');
     const [amount, setAmount] = useState('');
     const [necessity, setNecessity] = useState('5');
-    const [logs, setLogs] = useState([]); 
-
-    useEffect(() => {
-      const storedLogs = JSON.parse(localStorage.getItem('purchaseLogs')) || [];
-      setLogs(storedLogs);
-    }, []);
+    const [message, setMessage] = useState(null);
   
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -20,17 +16,28 @@ export function Log({currentUser}){
         amount,
         necessity,
       };
-  
-    const existingLogs = JSON.parse(localStorage.getItem('purchaseLogs')) || [];
-    existingLogs.push(logEntry);
-    localStorage.setItem('purchaseLogs', JSON.stringify(existingLogs));
-    console.log('Logging Purchase:', logEntry);
-    setPurchase('');
-    setAmount('');
-    setNecessity('5');
-  };
+      log('/api/log', logEntry);
+      setPurchase('');
+      setAmount('');
+      setNecessity('5');
+    };
+
+    //had to set this one up a bit differently
+    async function log(endpoint, logEntry){
+      const response = await fetch(endpoint,{
+        method: 'post',
+        body: JSON.stringify(logEntry),
+        headers:{
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+      const body = await response.json()
+      setMessage(`${body.msg}`);
+    }
+
 
     return (
+      <>
         <main>
           <h1>Log a Purchase</h1>
           <h2>User: {currentUser}</h2>
@@ -74,5 +81,7 @@ export function Log({currentUser}){
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>
         </main>
+        <MessageDialog message={message} onHide={() => setMessage(null)} />
+      </>
       );
 }

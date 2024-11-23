@@ -4,7 +4,7 @@ import { MessageDialog } from '../messageDialog';
 
 export function Connect({userName}){
     const[partnerEmail, setPartnerEmail] = React.useState(null);
-    const [displayError, setDisplayError] = React.useState(null);
+    const [message, setMessage] = React.useState(null);
     
     const handleEmailChange = (event) => {
         setPartnerEmail(event.target.value);
@@ -16,8 +16,6 @@ export function Connect({userName}){
     };
 
     async function submit(endpoint){
-      console.log(userName);
-      console.log(partnerEmail);
       const response = await fetch(endpoint, {
         method: 'post',
         body: JSON.stringify({ user: userName, reqUser: partnerEmail }),
@@ -27,11 +25,11 @@ export function Connect({userName}){
       });
       if(response?.status === 200){
         const body = await response.json();
-        setDisplayError(`${body.msg}`);
+        setMessage(`${body.msg}`);
       }
       else{
         const body = await response.json();
-        setDisplayError(`⚠ Error: ${body.msg}`);
+        setMessage(`⚠ Error: ${body.msg}`);
       }
     }
 
@@ -53,7 +51,7 @@ export function Connect({userName}){
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     </main>
-    <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />          
+    <MessageDialog message={message} onHide={() => setMessage(null)} />          
     </>
     );
 }

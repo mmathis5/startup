@@ -64,20 +64,26 @@ apiRouter.delete('/auth/logout', (req, res) => {
 
 //log a purchase
 apiRouter.post('/log', (req, res) =>{
-  const user = req.body.email;
+  const user = req.body.user;
   if (!user){
       res.status(400).send({ msg: 'No user found' });
+      return;
+    }
+  if (!req.body.amount){
+    res.status(400).send({msg: "Please complete form before submitting"});
+    return;
   }
-  const userLogs = logs[user];
-  if (!userLogs){
+  if (!req.body.purchase){
+    res.status(400).send({msg: "Please complete form before submitting"});
+    return;
+  }
+  if (!logs[user]){
       //create new array
-      userLogs = [];
+      logs[user] = [];
   }
   //pushing into array
-  userLogs.push(req.body);  
-  logs[user] = userLogs;
-
-  res.status(201).end();
+  logs[user].push(req.body);  
+  res.status(201).send({msg: "Purchase Logged successfully"});
 });
 
 //get logs
@@ -132,7 +138,7 @@ apiRouter.post('/connect', (req,res) =>{
   connections[reqUser] = user;
 
   res.status(200).send({
-    msg: "connection created successfully",
+    msg: "Connection created successfully",
     connections: {
       [user]: reqUser,
       [reqUser]: user

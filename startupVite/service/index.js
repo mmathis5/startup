@@ -71,7 +71,7 @@ apiRouter.get('/connectedUser', (req, res) => {
     return;
   }
   if (!connections[user]){
-    res.status(200).send({ connectedUser: null })
+    return;
   }
   else{  
     const connectedUser = connections[user];
@@ -104,25 +104,28 @@ apiRouter.post('/log', (req, res) =>{
 });
 
 //get logs
-apiRouter.get('/logs', (req,res) =>{
-  //user, connected user in url request. 
+apiRouter.get('/logs', (req, res) => {
+  // Extract user and connectedUser from query parameters
   const user = req.query.user;
   const connectedUser = req.query.connectedUser;
-  if (!user){
-      res.status(400).send({ msg: 'No user found' });
-      return;
+
+  if (!user) {
+    res.status(400).send({ msg: 'No user found' });
+    return;
   }
-  //get from logs
-  let userLogs = logs[user];
-  if (!userLogs){
-      userLogs = [];
+
+  // Get logs for the user
+  let userLogs = logs[user] || []; // Default to empty array if no logs for user
+
+  // Get logs for the connected user if available
+  let connectedLogs = [];
+  if (connectedUser && logs[connectedUser]) {
+    connectedLogs = logs[connectedUser];
   }
-  let connectedLogs = []
-  if (connectedUser & logs[connectedUser]){
-      connectedLogs = logs[connectedUser];
-  }
+  // Combine and send logs
   res.send(userLogs.concat(connectedLogs));
 });
+
 
 //connect a user
 apiRouter.post('/connect', (req,res) =>{

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes} from 'react-router-dom';
 import { About } from './about/about'
 import { Display } from './display/display'
 import { Log } from './log/log'
@@ -25,7 +25,6 @@ function App() {
       .finally(() => {
         localStorage.removeItem('userName');
         setAuthState(AuthState.Unauthenticated)
-        Navigate('/');
       });
   }
 

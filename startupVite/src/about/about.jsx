@@ -9,7 +9,6 @@ export function About(props){
 React.useEffect(() => {
     setImage1Url('stonks.jpg');
     setImage2Url('money.jpg');
-    setFact('This is a fun fact');
 
     fetch('https://uselessfacts.jsph.pl/api/v2/facts/random?language=en')
     .then((response) => {

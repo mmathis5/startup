@@ -30,8 +30,6 @@ export function Display({ userName }) {
 
   useEffect(() => {
     const fetchLogs = async () => {
-      if (!connectedUser) return; // Ensure connectedUser is available
-
       try {
         const response = await fetch(`/api/logs?user=${userName}&connectedUser=${connectedUser}`, {
           method: 'GET',
@@ -56,6 +54,7 @@ export function Display({ userName }) {
     <main>
       <div className="table-container">
         <h2>Logged Purchases</h2>
+        <h2>{connectedUser}</h2>
         {error && <p className="error">Error: {error}</p>}
         <table>
           <thead>

@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 export function Unauthenticated(props){
     const [userName, setUserName] = React.useState(props.username);
     const [password, setPassword] = React.useState('');
+    const [displayError, setDisplayError] = React.useState(null);
     
     async function loginUser() {
       loginOrCreate(`/api/auth/login`);
@@ -32,6 +33,7 @@ export function Unauthenticated(props){
     }
 
     return (
+      <>
           <div>
             <div className='rounded-box'>
               <span className='input-group-text'>@</span>
@@ -48,7 +50,9 @@ export function Unauthenticated(props){
               Create
             </Button>
           </div>
-        
+
+        <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />          
+        </>
       );
 
 }

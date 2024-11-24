@@ -72,23 +72,6 @@ apiRouter.delete('/auth/logout', (req, res) => {
   res.status(204).end();
 });
 
-//get connected user
-apiRouter.get('/connectedUser', (req, res) => {
-  const user = req.query.user;
-
-  if (!user) {
-    res.status(400).send({ msg: 'No user provided' });
-    return;
-  }
-  if (!connections[user]){
-    return;
-  }
-  else{  
-    const connectedUser = connections[user];
-    res.status(200).send({ connectedUser });
-}
-});
-
 //log a purchase
 apiRouter.post('/log', async (req, res) =>{
   const user = req.body.user;
@@ -132,46 +115,58 @@ apiRouter.get('/logs', (req, res) => {
   res.send(userLogs.concat(connectedLogs));
 });
 
+//get connected user
+apiRouter.get('/connectedUser', (req, res) => {
+  const user = req.query.user;
+
+  if (!user) {
+    res.status(400).send({ msg: 'No user provided' });
+    return;
+  }
+  if (!connections[user]){
+    return;
+  }
+  else{  
+    const connectedUser = connections[user];
+    res.status(200).send({ connectedUser });
+}
+});
 
 //connect a user
-apiRouter.post('/connect', (req,res) =>{
+apiRouter.post('/connect', async (req,res) =>{
   //user, requested connection in url request.
   const user = req.body.user;
   const reqUser = req.body.reqUser;
-  if (!DB.getUser(req.body.user)){
+  const userExists = await DB.getUser(user);
+  const reqUserExists = await DB.getUser(reqUser);
+  if (!user){
     res.status(400).send({msg: "No user found"})
     return;
   }
-  if (!DB.getUser(req.body.reqUser)){
-    res.status(400).send({msg: "This user does not exist in our system"})
-  }
-  if (!reqUserExists){
+  if (!reqUser){
     res.status(400).send({msg: "Please enter a user you wish to connect with."})
     return;
   }
+  if (!reqUserExists){
+    res.status(400).send({msg: "Your requested user does not exist in our system"})
+    return;
+  }
+  if (!userExists){
+    res.status(400).send({msg: "The current user doesn't appear in our system. Please log out and login again."});
+    return;
+  }
   //check if the current user is already connected to someone
-  const userConnection = connections[user];
-  const reqUserConnection = connections[reqUser]
-  if (userConnection) {
+  if (await DB.getConnectedUser(user)) {
     res.status(400).send({msg: 'You are already connected to a user.'})
     return;
   }
-  if (reqUserConnection){
+  if (await DB.getConnectedUser(reqUser)){
     res.status(400).send({msg: "The user you are trying to connect to is already connected to someone. Please choose another user to connect with."})
     return;
   }
   //create connections for both 
-  connections[user] = reqUser;
-  connections[reqUser] = user;
-
-  res.status(200).send({
-    msg: "Connection created successfully",
-    connections: {
-      [user]: reqUser,
-      [reqUser]: user
-    }
-  });
-
+  await DB.createConnection(user, reqUser);
+  res.status(200).send({ msg: 'Connection created successfully.' });
 });
 
 const httpService = app.listen(port, () => {

@@ -6,7 +6,7 @@ const config = require('./dbConfg.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('simon');
+const db = client.db('startup');
 const userCollection = db.collection('user');
 const connectionsCollection = db.collection('connections');
 const logsCollection = db.collection('logs');
@@ -39,9 +39,14 @@ async function createUser(email, password){
     return user;
 }
 
+function getConnectedUser(user){
+    return connectionsCollection.findOne({user: user});
+}
+
 module.exports = {
     getUser,
     getUserByToken,
     createUser,
+    getConnectedUser
   };
   

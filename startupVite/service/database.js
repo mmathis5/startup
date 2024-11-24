@@ -40,13 +40,36 @@ async function createUser(email, password){
 }
 
 function getConnectedUser(user){
-    return connectionsCollection.findOne({user: user});
+    return connectionsCollection.findOne({user});
 }
+
+async function logPurchase(user, purchase){
+    await logsCollection.insertOne({user, ...purchase});
+}
+
+async function getLogs(user, connectedUser = null){
+    const logs = await logsCollection.find({
+        $or: [{ user }, { user: connectedUser }],
+      }).toArray();
+      return logs;
+}
+
+async function createConnection(user, reqUser){
+    await connectionsCollection.insertMany([
+        { user, connectedUser: reqUser },
+        { user: reqUser, connectedUser: user },
+      ]);
+}
+
+
 
 module.exports = {
     getUser,
     getUserByToken,
     createUser,
-    getConnectedUser
+    logPurchase,
+    getLogs,
+    createConnection,
+    getConnectedUser,
   };
   

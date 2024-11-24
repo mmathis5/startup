@@ -142,11 +142,12 @@ apiRouter.post('/connect', (req,res) =>{
   //user, requested connection in url request.
   const user = req.body.user;
   const reqUser = req.body.reqUser;
-  const userExists = users[user];
-  const reqUserExists = users[reqUser];
-  if (!userExists){
-    res.status(400).send({meg: "No user found"})
+  if (!DB.getUser(req.body.user)){
+    res.status(400).send({msg: "No user found"})
     return;
+  }
+  if (!DB.getUser(req.body.reqUser)){
+    res.status(400).send({msg: "This user does not exist in our system"})
   }
   if (!reqUserExists){
     res.status(400).send({msg: "Please enter a user you wish to connect with."})

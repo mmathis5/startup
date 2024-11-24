@@ -86,3 +86,10 @@ I am going to use the required technologies in the following ways.
 - [x] Frontend served up using Express static middleware - I used fetch to call my endpoints
 - [x] 3rd party API - I am currently generating a fun fact on my about page. I may refine this to be more pertinent to the functionality of my application. 
 - [x] Service endpoints - I have many endpoints in my service. I have three for my login funcitonality, one to connect two users, one to log purchases, one to retrieve a connected user, and one to retrieve all the logs for a user and their specified connected user. 
+
+# Login Delieverable
+- [x] New users can register. Existing users can log in and log out
+- [x] Data is being stored in a MongoDB 
+- [x] Data is retrived from a MongoDB
+- [x] You can only view the Home and about page until you log in. 
+- [x] I also configured the endpoints to work with the MongoDB to log purchases, make user connections, and pull connected users/ purchase logs. 

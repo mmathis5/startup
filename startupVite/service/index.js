@@ -90,27 +90,23 @@ apiRouter.get('/connectedUser', (req, res) => {
 });
 
 //log a purchase
-apiRouter.post('/log', (req, res) =>{
+apiRouter.post('/log', async (req, res) =>{
   const user = req.body.user;
   if (!user){
       res.status(400).send({ msg: 'No user found' });
       return;
     }
-  if (!req.body.amount){
+  if (!req.body.amount || !req.body.purchase){
     res.status(400).send({msg: "Please complete form before submitting"});
     return;
   }
-  if (!req.body.purchase){
-    res.status(400).send({msg: "Please complete form before submitting"});
-    return;
+  try {
+    await DB.logPurchase(user, req.body);
+    res.status(201).send({ msg: 'Purchase logged successfully.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ msg: 'An error occurred while logging the purchase.' });
   }
-  if (!logs[user]){
-      //create new array
-      logs[user] = [];
-  }
-  //pushing into array
-  logs[user].push(req.body);  
-  res.status(201).send({msg: "Purchase Logged successfully"});
 });
 
 //get logs

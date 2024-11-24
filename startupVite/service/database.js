@@ -35,7 +35,7 @@ async function createUser(email, password){
         password: passwordHash,
         token: uuid.v4(),
     };
-    await userCollection.inertOne(user);
+    await userCollection.insertOne(user);
     return user;
 }
 

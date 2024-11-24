@@ -1,4 +1,4 @@
-const cookieParser = require('cookieParser');
+const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
@@ -31,14 +31,23 @@ app.use(express.static('public'));
 // let connections = {};
 // let logs = {}
 
+// setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  var user = users[req.body.email];
-  if (user) {
+  if (await DB.getUser(req.body.email)) {
     res.status(409).send({ msg: 'A user already exists under this email. Please login.' });
   } else {
-    var user = { email: req.body.email, password: req.body.password, token: uuid.v4() };
-    users[user.email] = user;
+    const user = await DB.createUser(req.body.email, req.body.password);
+
+    setAuthCookie(res, user.token);
 
     res.send({ token: user.token });
   }
@@ -46,11 +55,11 @@ apiRouter.post('/auth/create', async (req, res) => {
 
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = users[req.body.email];
+  const user = await DB.getUser(req.body.email);
   if (user) {
-    if (req.body.password === user.password) {
-      user.token = uuid.v4();
-      res.send({ token: user.token });
+    if (await bcrypt.compare(req.body.password, user.password)) {
+      setAuthCookie(res, user.token);
+      res.send({ id: user._id });
       return;
     }
   }
@@ -59,10 +68,7 @@ apiRouter.post('/auth/login', async (req, res) => {
 
 // DeleteAuth logout a user
 apiRouter.delete('/auth/logout', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.body.token);
-  if (user) {
-    delete user.token;
-  }
+  res.clearCookie(authCookieName);
   res.status(204).end();
 });
 

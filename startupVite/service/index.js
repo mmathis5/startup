@@ -93,41 +93,30 @@ apiRouter.post('/log', async (req, res) =>{
 });
 
 //get logs
-apiRouter.get('/logs', (req, res) => {
-  // Extract user and connectedUser from query parameters
-  const user = req.query.user;
-  const connectedUser = req.query.connectedUser;
-
+apiRouter.get('/logs', async (req, res) => {
+  const { user, connectedUser } = req.query;
   if (!user) {
-    res.status(400).send({ msg: 'No user found' });
+    res.status(400).send({ msg: 'No user provided.' });
     return;
   }
-
-  // Get logs for the user
-  let userLogs = logs[user] || []; // Default to empty array if no logs for user
-
-  // Get logs for the connected user if available
-  let connectedLogs = [];
-  if (connectedUser && logs[connectedUser]) {
-    connectedLogs = logs[connectedUser];
-  }
-  // Combine and send logs
-  res.send(userLogs.concat(connectedLogs));
+  const logs = await DB.getLogs(user, connectedUser);
+  res.send(logs);
 });
 
 //get connected user
-apiRouter.get('/connectedUser', (req, res) => {
+apiRouter.get('/connectedUser', async (req, res) => {
   const user = req.query.user;
-
   if (!user) {
     res.status(400).send({ msg: 'No user provided' });
     return;
   }
-  if (!connections[user]){
+  const userExists = await DB.getUser(user);
+  if (!userExists){
+    res.status(400).send({msg: "The current user doesn't appear in our system. Please log out and login again."});
     return;
   }
   else{  
-    const connectedUser = connections[user];
+    const connectedUser = await DB.getConnectedUser(user);
     res.status(200).send({ connectedUser });
 }
 });
@@ -147,17 +136,17 @@ apiRouter.post('/connect', async (req,res) =>{
     res.status(400).send({msg: "Please enter a user you wish to connect with."})
     return;
   }
+  //check if the current user is already connected to someone
+  if (await DB.getConnectedUser(user)) {
+    res.status(400).send({msg: 'You are already connected to a user.'})
+    return;
+  }
   if (!reqUserExists){
     res.status(400).send({msg: "Your requested user does not exist in our system"})
     return;
   }
   if (!userExists){
     res.status(400).send({msg: "The current user doesn't appear in our system. Please log out and login again."});
-    return;
-  }
-  //check if the current user is already connected to someone
-  if (await DB.getConnectedUser(user)) {
-    res.status(400).send({msg: 'You are already connected to a user.'})
     return;
   }
   if (await DB.getConnectedUser(reqUser)){

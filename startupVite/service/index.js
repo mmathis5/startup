@@ -42,6 +42,7 @@ function setAuthCookie(res, authToken) {
 
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
+  console.log("Auth create called");
   if (await DB.getUser(req.body.email)) {
     res.status(409).send({ msg: 'A user already exists under this email. Please login.' });
   } else {

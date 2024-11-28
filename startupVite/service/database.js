@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const config = require('./dbConfg.json');
 
-
+console.log(config);
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('startup');
@@ -21,7 +21,10 @@ const logsCollection = db.collection('logs');
 
 
 function getUser(email){
-    return userCollection.findOne({email: email});
+    console.log("Get User by Email in DB")
+    userFound = userCollection.findOne({email: email});
+    console.log("User Found "+userFound);
+    return userFound;
 }
 
 function getUserByToken(token){

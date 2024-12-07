@@ -1,8 +1,3 @@
-const LogEvent = {
-    System: 'system',
-
-}
-
 class EventMessage {
     constructor(from, type, value){
         this.from = from;
@@ -12,18 +7,17 @@ class EventMessage {
 }
 
 class GameEventNotifier{
-    events = []
     handlers = []
 
     constructor() {
         let port = window.location.port;
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
         this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
-        this.socket.onopen = (event) => {
-          this.receiveEvent(new EventMessage('Simon', GameEvent.System, { msg: 'connected' }));
+        this.socket.onopen = () => {
+            console.log("Websocket connection established.");
         };
-        this.socket.onclose = (event) => {
-          this.receiveEvent(new EventMessage('Simon', GameEvent.System, { msg: 'disconnected' }));
+        this.socket.onclose = () => {
+            console.log("Websocket connection closed.");
         };
         this.socket.onmessage = async (msg) => {
           try {
@@ -33,8 +27,8 @@ class GameEventNotifier{
         };
       }
     
-      broadcastEvent(from, type, value) {
-        const event = new EventMessage(from, type, value);
+      broadcastEvent(from, message) {
+        const event = new EventMessage(from, "message", { text: message });
         this.socket.send(JSON.stringify(event));
       }
     
@@ -59,4 +53,4 @@ class GameEventNotifier{
 }
 
 const LogNotifier = new GameEventNotifier();
-export { LogEvent, LogNotifier };
+export { LogNotifier };

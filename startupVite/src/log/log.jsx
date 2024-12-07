@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { MessageDialog } from '../messageDialog';
-import { LogEvent, LogNotifier} from './notifyLog'
+import { LogNotifier} from './notifyLog'
 
 export function Log({currentUser}){
     const [purchase, setPurchase] = useState('');

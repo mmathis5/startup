@@ -3,7 +3,7 @@ const uuid = require('uuid');
 
 function peerProxy(httpServer){
     //websocket object
-    const wws = new WebSocketServer({ noServer: true});
+    const wss = new WebSocketServer({ noServer: true});
 
     //updgrade from http to websocket
     httpServer.on('upgrade', (request, socket, head) => {

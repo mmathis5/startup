@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { MessageDialog } from '../messageDialog';
+import { LogEvent, LogNotifier} from './notifyLog'
 
 export function Log({currentUser}){
     const [purchase, setPurchase] = useState('');
@@ -20,6 +21,8 @@ export function Log({currentUser}){
       setPurchase('');
       setAmount('');
       setNecessity('5');
+      
+      LogNotifier.broadcastEvent(username, "just logged a purchase");
     };
 
     //had to set this one up a bit differently

@@ -24,7 +24,7 @@ export function Display({ userName }) {
         }
 
         const data = await response.json();
-        setConnectedUser(data.connectedUser); // Set the connected user (partner name)
+        setConnectedUser(data.connectedUser.connectedUser); // Set the connected user (partner name)
       } catch {
         setConnectedUser(null);
       }
@@ -81,7 +81,6 @@ export function Display({ userName }) {
     <main>
       <div className="table-container">
         <h2>Logged Purchases</h2>
-        <h2>{connectedUser}</h2>
         {error && <p className="error">Error: {error}</p>}
         <table>
           <thead>

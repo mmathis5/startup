@@ -97,6 +97,6 @@ I am going to use the required technologies in the following ways.
 # Websocket Deliverable
 - [x] Backend listens for WebsocketConnection (index.js and peerProxy.js)
 - [x] Frontend makes WebSocket connection (notifyLog.js)
-- [x] Data sent over WebSocket connection when a user logs a purchase.  
-- [x] WebSocket data displayed in the application interface: if user1 logs a purchase and user2 is connected to them and currently viewing the Display page (where all the logs are able to be viewed), the page will insert user1's log in real time on user2's application. (say user3 is also viewing the display page when user1 logs a purchase: user3 will view the event via the WS connection, recognize that user1 is not connected to them, and disregard the event) 
+- [x] Data sent over WebSocket connection when a user logs a purchase (log.jsx).  
+- [x] WebSocket data displayed in the application interface: if user1 logs a purchase and user2 is connected to them and currently viewing the Display page (where all the logs are able to be viewed), the page will insert user1's log in real time on user2's application. (say user3 is also viewing the display page when user1 logs a purchase: user3 will view the event via the WS connection, recognize that user1 is not connected to them, and disregard the event). (display.jsx) 
 - [x] Everything in the application is fully functional. Nothing is mocked up. It is a complete and functional website that allows two partners to log and view their purchases. 

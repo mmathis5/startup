@@ -8,6 +8,7 @@ class EventMessage {
 
 class LogEventNotifier{
     handlers = []
+    events = []
 
     constructor() {
         let port = window.location.port;
@@ -23,8 +24,12 @@ class LogEventNotifier{
             console.log("Message received")
           try {
             const event = JSON.parse(await msg.data.text());
+            console.log("message was parsed")
             this.receiveEvent(event);
-          } catch {}
+            console.log("message completed try block")
+          } catch {
+            console.log("message went into the catch section")
+          }
         };
       }
     

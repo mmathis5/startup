@@ -10,6 +10,28 @@ export function Display({ userName }) {
   //state that will trigger a re-render when new data is received
   const [refreshKey, setRefreshKey] = useState(0);
 
+  const fetchLogs = async (currentUser, partner) => {
+    try {
+      const queryParams = partner 
+        ? `?user=${currentUser}&connectedUser=${partner}` 
+        : `?user=${currentUser}`;
+        
+      const response = await fetch(`/api/logs${queryParams}`, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.msg || 'Failed to fetch logs');
+      }
+
+      const data = await response.json();
+      setLogs(data);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   useEffect(() => {
     // Fetch the connected user
     const fetchPartnerName = async () => {
@@ -33,27 +55,10 @@ export function Display({ userName }) {
     fetchPartnerName();
   }, [userName]);
 
+  //load the data 
   useEffect(() => {
-    const fetchLogs = async () => {
-      try {
-        const response = await fetch(`/api/logs?user=${userName}&connectedUser=${connectedUser}`, {
-          method: 'GET',
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.msg || 'Failed to fetch logs');
-        }
-
-        const data = await response.json();
-        setLogs(data);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-
-    fetchLogs();
-  }, [userName, connectedUser]); // Re-run when userName or connectedUser changes
+    fetchLogs(userName, connectedUser);
+  }, [userName, connectedUser]);
 
   //Listen for WebSocket messages
   useEffect(() => {
@@ -73,7 +78,8 @@ export function Display({ userName }) {
   //Refetch data when refreshKey changes
   useEffect(() => {
     if (refreshKey > 0) {
-        fetchLogs();
+        console.log("trying to refresh");
+        fetchLogs(userName, connectedUser);
     }
   }, [refreshKey]);
 

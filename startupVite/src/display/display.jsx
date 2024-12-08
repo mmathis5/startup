@@ -64,7 +64,12 @@ export function Display({ userName }) {
   useEffect(() => {
     const handleEvent = (event) => {
         console.log("Received WebSocket event:", event);
-        setRefreshKey((prevKey) => prevKey + 1); // Increment refreshKey to trigger re-render
+        if (event.from == connectedUser){
+          setRefreshKey((prevKey) => prevKey + 1); // Increment refreshKey to trigger re-render
+        }
+        else {
+          console.log("Event ignored: does not match connectedUser")
+        }
     };
 
     LogNotifier.addHandler(handleEvent);
@@ -72,7 +77,7 @@ export function Display({ userName }) {
     return () => {
         LogNotifier.removeHandler(handleEvent); // Cleanup on unmount
     };
-  }, []);
+  }, [connectedUser]);
 
 
   //Refetch data when refreshKey changes

@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { LogNotifier } from '../log/notifyLog';
+
 
 export function Display({ userName }) {
   const [logs, setLogs] = useState([]);
   const [connectedUser, setConnectedUser] = useState(null);
   const [error, setError] = useState(null);
+
+  //state that will trigger a re-render when new data is received
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     // Fetch the connected user
@@ -49,6 +54,28 @@ export function Display({ userName }) {
 
     fetchLogs();
   }, [userName, connectedUser]); // Re-run when userName or connectedUser changes
+
+  //Listen for WebSocket messages
+  useEffect(() => {
+    const handleEvent = (event) => {
+        console.log("Received WebSocket event:", event);
+        setRefreshKey((prevKey) => prevKey + 1); // Increment refreshKey to trigger re-render
+    };
+
+    LogNotifier.addHandler(handleEvent);
+
+    return () => {
+        LogNotifier.removeHandler(handleEvent); // Cleanup on unmount
+    };
+  }, []);
+
+
+  //Refetch data when refreshKey changes
+  useEffect(() => {
+    if (refreshKey > 0) {
+        fetchLogs();
+    }
+  }, [refreshKey]);
 
   return (
     <main>

@@ -22,7 +22,7 @@ export function Log({currentUser}){
       setAmount('');
       setNecessity('5');
       
-      LogNotifier.broadcastEvent(username, "just logged a purchase");
+      LogNotifier.broadcastEvent(currentUser, "just logged a purchase");
     };
 
     //had to set this one up a bit differently

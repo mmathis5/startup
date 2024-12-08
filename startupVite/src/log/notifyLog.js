@@ -6,7 +6,7 @@ class EventMessage {
     }
 }
 
-class GameEventNotifier{
+class LogEventNotifier{
     handlers = []
 
     constructor() {
@@ -20,6 +20,7 @@ class GameEventNotifier{
             console.log("Websocket connection closed.");
         };
         this.socket.onmessage = async (msg) => {
+            console.log("Message received")
           try {
             const event = JSON.parse(await msg.data.text());
             this.receiveEvent(event);
@@ -52,5 +53,5 @@ class GameEventNotifier{
     
 }
 
-const LogNotifier = new GameEventNotifier();
+const LogNotifier = new LogEventNotifier();
 export { LogNotifier };

@@ -9,6 +9,7 @@ class EventMessage {
 class LogEventNotifier{
     handlers = []
     events = []
+    static instance; //hopefully this will fix my navigation issue
 
     constructor() {
         let port = window.location.port;

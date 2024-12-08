@@ -18,13 +18,16 @@ function App() {
   function logout() {
     fetch(`/api/auth/logout`, {
       method: 'delete',
-    })
+    })    
       .catch(() => {
         // Logout failed. Assuming offline
       })
       .finally(() => {
         localStorage.removeItem('userName');
-        setAuthState(AuthState.Unauthenticated)
+        setAuthState(AuthState.Unauthenticated);
+        //fetch the home link and simulate a click. 
+        const homeLink = document.getElementsByClassName('home-nav-link')[0]; 
+        homeLink.click();
       });
   }
 
@@ -35,7 +38,7 @@ function App() {
         <nav>
           <menu className = 'navbar-nav'>
             <li className = 'nav-item-1'>
-              <NavLink className = 'nav-link' to= ''>
+              <NavLink className = 'home-nav-link' to= ''>
                 Home
               </NavLink>
             </li>

@@ -77,7 +77,7 @@ export function Display({ userName }) {
     return () => {
         LogNotifier.removeHandler(handleEvent); // Cleanup on unmount
     };
-  }, [connectedUser]);
+  }, [refreshKey, userName, connectedUser]);
 
 
   //Refetch data when refreshKey changes

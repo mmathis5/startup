@@ -1,6 +1,3 @@
-# View My Website at the following address:
-https://startup.mmathis5260.click (Note that it is not currently fully functional)
-
 # Startup
 CS 260 Startup
 ## Link to Notes.md
